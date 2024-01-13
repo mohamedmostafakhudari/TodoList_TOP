@@ -1,15 +1,14 @@
 const path = require("path");
+const Handlebars = require("handlebars");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const HtmlBundlerPlugin = require("html-bundler-webpack-plugin");
 
 module.exports = {
-	entry: {
-		app: "./src/index.js",
-	},
+	entry: "./src/app/main.js",
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: "Todo List",
-			template: "./src/template.html",
-			filename: "index.html",
+			title: "My Todo List",
+			template: "./src/views/index.handlebars",
 		}),
 	],
 	output: {
@@ -20,8 +19,22 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.handlebars$/,
+				loader: "handlebars-loader",
+				query: {
+					partialDirs: [path.join(__dirname, "views", "partials")],
+				},
+			},
+			{
 				test: /\.css$/i,
 				use: ["style-loader", "css-loader", "postcss-loader"],
+			},
+			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: "asset/resource",
+				generator: {
+					filename: "assets/img/[name].[hash:8][ext]",
+				},
 			},
 		],
 	},
