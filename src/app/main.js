@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import createTodoList from "../components/todoList";
 import createTodoItem from "../components/todoItem";
 import Logger from "../logger";
-import compiledTodoListTemplate from "../views/partials/todoList.handlebars";
+import compiledTodoListTemplate from "../views/partials/todoList.hbs";
 const tempData = {
 	listTitle: "My Todo List",
 	todoItems: [

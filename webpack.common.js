@@ -8,7 +8,9 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "My Todo List",
-			template: "./src/views/index.handlebars",
+			template: "./src/views/index.hbs",
+			filename: "index.html",
+			inject: true,
 		}),
 	],
 	output: {
@@ -19,11 +21,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.handlebars$/,
+				test: /\.hbs$/,
 				loader: "handlebars-loader",
-				query: {
-					partialDirs: [path.join(__dirname, "views", "partials")],
-				},
 			},
 			{
 				test: /\.css$/i,
