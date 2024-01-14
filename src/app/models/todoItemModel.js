@@ -1,8 +1,8 @@
-const createTodoItem = (title, text, priority) => {
+const createTodoItem = (title, task, priority) => {
 	return {
 		id: crypto.randomUUID(),
 		title,
-		text,
+		task,
 		priority,
 		done: false,
 	};
