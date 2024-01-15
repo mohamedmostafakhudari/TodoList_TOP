@@ -1,7 +1,9 @@
 <li data-todoid="{{id}}">
-	<h2>{{title}}</h2>
-	<p>{{task}}</p>
-	<p>{{priority}}</p>
-	<p>{{done}}</p>
+	<h2 data-type="title">{{title}}</h2>
+	<p data-type="task">{{task}}</p>
+	<p data-type="dueDate">{{dueDate}}</p>
+	<p data-type="priority" data-value="{{value}}">{{priority}}</p>
+	<p data-type="done">{{done}}</p>
 	<button id="deleteTodo">Delete</button>
+	<button id="editTodo">Edit</button>
 </li>

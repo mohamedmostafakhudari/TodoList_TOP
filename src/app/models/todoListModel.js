@@ -31,7 +31,7 @@ export class TodoListModel {
 	constructor() {
 		this.todos = [
 			{
-				id: crypto.randomUUID(),
+				id: 1,
 				title: "Todo 1",
 				task: "Todo 1 task",
 				priority: "low",
@@ -45,6 +45,9 @@ export class TodoListModel {
 	}
 	deleteTodo(todoId) {
 		this.todos = this.todos.filter((t) => t.id !== todoId);
+	}
+	editTodo(todoId, updatedTodo) {
+		this.todos = this.todos.map((todo) => (todo.id === +todoId ? Object.assign({}, todo, updatedTodo) : todo));
 	}
 	getTodos() {
 		return this.todos;

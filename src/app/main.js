@@ -10,12 +10,18 @@ class TodoListController {
 		this.view.renderTodoList(this.model.getTodos());
 	}
 
-	addTodo(todo) {
+	addTodo({ title, task, priority, dueDate }) {
+		const todo = createTodoItem(title, task, priority, dueDate);
 		this.model.addTodo(todo);
 		this.view.renderTodoList(this.model.getTodos());
 	}
 	deleteTodo(todoId) {
 		this.model.deleteTodo(todoId);
+		this.view.renderTodoList(this.model.getTodos());
+	}
+	editTodo(todoId, updatedTodo) {
+		console.log(todoId);
+		this.model.editTodo(todoId, updatedTodo);
 		this.view.renderTodoList(this.model.getTodos());
 	}
 }
