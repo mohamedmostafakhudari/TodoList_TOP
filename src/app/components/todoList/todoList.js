@@ -15,6 +15,9 @@ function throttle(cb, delay) {
 		}, delay);
 	};
 }
+function delay(ms) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
 export default class TodoList {
 	constructor(eventEmitter) {
 		this.eventEmitter = eventEmitter;
@@ -69,7 +72,6 @@ export default class TodoList {
 		const $todoList = document.createElement("ul");
 		$todoList.setAttribute("id", "todoList");
 		$todoList.setAttribute("data-component", "todo-list");
-		// $todoList.className = "flex flex-col gap-12";
 		$todoList.className =
 			"grid grid-flow-col grid-rows-[repeat(2,auto)] auto-cols-[800px] gap-10 overflow-x-scroll snap-x snap-mandatory max-w-[900px] scroll-smooth grid h-full content-center pointer-events-none";
 
@@ -95,14 +97,8 @@ export default class TodoList {
 		$pageButton.textContent = pageNumber + 1;
 		$pageButton.addEventListener("click", (e) => {
 			e.preventDefault();
-			if (pageNumber + 1 === this.currentPage) return;
-			if (pageNumber + 1 > this.currentPage) {
-				this.scrollRight(800 * Math.abs(pageNumber + 1 - this.currentPage));
-			} else if (pageNumber + 1 < this.currentPage) {
-				this.scrollLeft(800 * Math.abs(pageNumber + 1 - this.currentPage));
-			}
-			this.currentPage = pageNumber + 1;
-			this.renderPageNumbering();
+			this.collapseAllTodoItems();
+			delay(300).then(() => this.handlePageChange(pageNumber).bind(this));
 		});
 		return $pageButton;
 	}
@@ -184,21 +180,29 @@ export default class TodoList {
 			});
 			this.$prevBtn.addEventListener("click", (e) => {
 				e.stopImmediatePropagation();
-				this.throttledHandlePrevBtnClick();
+				const feedback = this.collapseAllTodoItems();
+				if (feedback.collapsed) {
+					delay(300).then(() => this.throttledHandlePrevBtnClick());
+				} else {
+					this.throttledHandlePrevBtnClick();
+				}
 			});
 			this.$nextBtn.addEventListener("click", (e) => {
 				e.stopImmediatePropagation();
-				this.throttledHandleNextBtnClick();
+				const feedback = this.collapseAllTodoItems();
+				if (feedback.collapsed) {
+					delay(300).then(() => this.throttledHandleNextBtnClick());
+				} else {
+					this.throttledHandleNextBtnClick();
+				}
 			});
 		});
 	}
 	handlePrevBtnClick() {
 		if (this.$todoList.scrollLeft <= 0) return;
 		this.scrollLeft();
-		console.log("currentPage", this.currentPage);
 		if (this.currentPage >= 1) {
 			this.updatePageNumber(-1);
-			console.log("currentPage", this.currentPage);
 			this.renderPageNumbering();
 		}
 	}
@@ -210,8 +214,24 @@ export default class TodoList {
 			this.renderPageNumbering();
 		}
 	}
+	handlePageChange(pageNumber) {
+		if (pageNumber + 1 === this.currentPage) return;
+		if (pageNumber + 1 > this.currentPage) {
+			this.scrollRight(800 * Math.abs(pageNumber + 1 - this.currentPage));
+		} else if (pageNumber + 1 < this.currentPage) {
+			this.scrollLeft(800 * Math.abs(pageNumber + 1 - this.currentPage));
+		}
+		this.currentPage = pageNumber + 1;
+		this.renderPageNumbering();
+	}
 	collapseAllTodoItems() {
+		const feedback = {
+			collapsed: false,
+		};
 		this.$todoItems.forEach(($todoItem) => {
+			if ($todoItem.classList.contains("active")) {
+				feedback.collapsed = true;
+			}
 			$todoItem.classList.remove("active");
 			const $expandIcon = $todoItem.querySelector("#expandIcon");
 			const $collapseIcon = $todoItem.querySelector("#collapseIcon");
@@ -220,6 +240,7 @@ export default class TodoList {
 			$expandIcon.classList.remove("opacity-0");
 			$collapseIcon.classList.add("opacity-0");
 		});
+		return feedback;
 	}
 	scrollRight(scrollByValue = 800) {
 		this.$todoList.scrollBy({
