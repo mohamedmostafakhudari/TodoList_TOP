@@ -1,0 +1,157 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>{{htmlWebpackPlugin.options.title}}</title>
+	</head>
+	<body class="grid place-items-center">
+		<dialog
+			id="todoFormDialog"
+			class="rounded-md shadow-lg shadow-black/50 py-6 absolute z-10 backdrop:bg-black/30"
+		>
+			<div class="">
+				<button
+					id="closeBtn"
+					class="block ml-auto py-3 px-4"
+				>
+					<div class="w-8">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+						>
+							<title>close-thick</title>
+							<path d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z" />
+						</svg>
+					</div>
+				</button>
+			</div>
+
+			<!-- Injected by JS -->
+		</dialog>
+		<div class="container mx-auto h-[800px] max-h-[1000px] max-w-[1200px] overflow-hidden rounded-lg grid grid-cols-[280px_1fr] bg-stone-700">
+			<aside
+				id="projects"
+				class="bg-zinc-800 text-white mr-6 shadow-lg shadow-zinc-500/80"
+			>
+				<ul class="flex flex-col">
+					<li class="">
+						<button class="bg-green-500 block w-full py-4">Project 1</button>
+					</li>
+					<li>
+						<button>Project 2</button>
+					</li>
+				</ul>
+			</aside>
+			<main class="py-4">
+				<div class="container mx-auto h-full flex flex-col relative">
+					<div class="flex items-center justify-between px-6">
+						<div class="flex gap-4 justify-end">
+							<!-- Filter -->
+							<div class="">
+								<p class="text-blue-200 font-bold">Filter By:</p>
+								<select
+									name="filterBy"
+									id="filterBy"
+								>
+									<option value="all">All</option>
+									<optgroup label="Filter by time">
+										<option value="today">Today</option>
+										<option value="upcoming">Upcoming</option>
+										<option value="overdue">Overdue</option>
+									</optgroup>
+									<optgroup label="Filter by status">
+										<option value="completed">Completed</option>
+										<option value="incomplete">Not Completed</option>
+									</optgroup>
+									<optgroup label="Filter by priority">
+										<option value="high">High</option>
+										<option value="medium">Medium</option>
+										<option value="low">Low</option>
+									</optgroup>
+								</select>
+							</div>
+							<!-- Sort -->
+							<div>
+								<p class="text-blue-200 font-bold">Sort By</p>
+								<select
+									name="sortBy"
+									id="sortBy"
+								>
+									<option value="alphabetically">A-Z</option>
+									<option value="byDate">By date</option>
+									<option value="byStatus">By status</option>
+									<option value="byPriority">By priority</option>
+								</select>
+							</div>
+						</div>
+						<div class="flex gap-4 justify-end">
+							<!-- Carousel buttons -->
+							<button
+								class="text-white"
+								id="prevBtn"
+							>
+								<div class="w-16">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+									>
+										<title>chevron-left</title>
+										<path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
+									</svg>
+								</div>
+							</button>
+							<button
+								class="text-white"
+								id="nextBtn"
+							>
+								<div class="w-16">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 24 24"
+										fill="currentColor"
+									>
+										<title>chevron-right</title>
+										<path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+									</svg>
+								</div>
+							</button>
+						</div>
+					</div>
+					<!-- Filter Tags List -->
+					<div
+						id="filterList"
+						class="absolute right-6 top-20 z-10 flex flex-row-reverse flex-wrap gap-2 mt-4"
+					>
+						<!-- Injected by JS -->
+					</div>
+					<button
+						id="openTodoForm"
+						class="bg-slate-800 text-white p-4 rounded-lg fixed right-4 bottom-4 duration-200 ease-in-out scale-90 hover:scale-100 group"
+					>
+						<div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-[3%] duration-200 ease-in-out pointer-events-none"></div>
+						<div class="w-20">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 24 24"
+								fill="currentColor"
+							>
+								<title>plus</title>
+								<path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+							</svg>
+						</div>
+					</button>
+					<div
+						id="todoListContainer"
+						class="flex-1 max-w-[900px] relative isolate"
+					>
+						<!-- Injected by JS -->
+					</div>
+				</div>
+			</main>
+		</div>
+	</body>
+</html>

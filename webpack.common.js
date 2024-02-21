@@ -8,7 +8,7 @@ module.exports = {
 	plugins: [
 		new HtmlWebpackPlugin({
 			title: "My Todo List",
-			template: "./src/views/index.hbs",
+			template: "./src/index.html",
 			filename: "index.html",
 			inject: true,
 		}),

@@ -1,29 +1,17 @@
 import "./style.css";
-import { TodoListView } from "./views/todoListView";
-import { TodoListModel } from "./models//todoListModel.js";
-import createTodoItem from "./models/todoItemModel.js";
+import EventEmitter from "./Event.js";
+import TodoList from "./components/todoList/todoList.js";
+import TodoForm from "./components/todoForm/todoForm.js";
+import Projects from "./components/projects/projects.js";
+const eventEmitter = new EventEmitter();
+const $openTodoForm = document.querySelector("#openTodoForm");
+const todoList = new TodoList(eventEmitter);
 
-class TodoListController {
-	constructor() {
-		this.model = new TodoListModel();
-		this.view = new TodoListView(this);
-		this.view.renderTodoList(this.model.getTodos());
-	}
+const todoForm = new TodoForm(eventEmitter);
+$openTodoForm.addEventListener("click", () => {
+	todoForm.clear();
+	todoForm.render();
+	todoForm.openDialog();
+});
 
-	addTodo({ title, task, priority, dueDate }) {
-		const todo = createTodoItem(title, task, priority, dueDate);
-		this.model.addTodo(todo);
-		this.view.renderTodoList(this.model.getTodos());
-	}
-	deleteTodo(todoId) {
-		this.model.deleteTodo(todoId);
-		this.view.renderTodoList(this.model.getTodos());
-	}
-	editTodo(todoId, updatedTodo) {
-		console.log(todoId);
-		this.model.editTodo(todoId, updatedTodo);
-		this.view.renderTodoList(this.model.getTodos());
-	}
-}
-
-const todoListController = new TodoListController();
+const projects = new Projects(eventEmitter);

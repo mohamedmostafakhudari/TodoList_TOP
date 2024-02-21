@@ -1,3 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400&family=Poppins:wght@600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+	@apply bg-slate-900 text-slate-500 leading-[1.5] font-fira;
+}
+body::after {
+	content: "";
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../images/12572988_Triangle_Abstract_Geometric_Background.jpg");
+	background-size: cover;
+	opacity: 0.2;
+	mix-blend-mode: overlay;
+	z-index: -1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply font-poppins;
+}
+h1,
+h2 {
+	@apply leading-[1];
+}
+h3,
+h4 {
+	@apply leading-[1.3];
+}
+h5,
+h6 {
+	@apply leading-[1.5];
+}
+
+[data-component="todo-item"] #todoDetails {
+	@apply max-h-0;
+}
+[data-component="todo-item"].active #todoDetails {
+	@apply max-h-[1000px];
+}
+body > .container::-webkit-scrollbar {
+	display: none;
+}
+#todoList::-webkit-scrollbar {
+	display: none;
+}

@@ -1,0 +1,83 @@
+		<div class="">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center gap-12">
+					<div id="priorityIcon" class="stroke-yellow-600">
+						<svg class="" width="23" height="40" viewBox="0 0 23 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V40H2L11.5 29L21 40H23V3C23 1.34315 21.6569 0 20 0H3Z" fill="currentColor" />
+							<line x1="2.5" y1="4.5" x2="2.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+							<line x1="20.5" y1="4.5" x2="20.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+						</svg>
+					</div>
+					<p data-component="tag" data-date="{{todoDueDate}}" class="text-green-600 border border-slate-400 rounded-full px-4 py-1 capitalize animate-bounce mt-3">
+						today
+					</p>
+				</div>
+				<div class="flex items-center justify-end gap-2">
+					<button id="deleteTodoBtn" class="px-4 py-4">
+						<div class="text-orange-500 w-10">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><title>delete</title><path
+									d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"
+								/></svg>
+						</div>
+					</button>
+					<button id="editTodoBtn" class="px-4 py-4">
+						<div class="text-blue-500 w-10">
+							<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><title>pencil</title><path
+									d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+								/></svg>
+						</div>
+					</button>
+				</div>
+			</div>
+			<div class="flex items-center justify-between">
+				<h2 class="todoTitle text-5xl text-slate-800 font-bold pb-6">{{todoTitle}}</h2>
+				<div class="flex items-center gap-2">
+					<p>not yet</p>
+					<label for="todoDone" class="w-16 p-1 bg-slate-200 rounded-full relative">
+						<input type="checkbox" {{#if done}}checked{{/if}} name="todoDone" id="todoDone" class="appearance-none absolute inset-0 border-2 border-slate-300 shadow-md rounded-full cursor-pointer peer" />
+						<div class="w-7 bg-slate-400 aspect-square rounded-full duration-200 ease-in-out peer-checked:translate-x-7 peer-checked:bg-green-500 pointer-events-none"></div>
+					</label>
+					<p>done</p>
+				</div>
+			</div>
+			<div class="todoTags flex flex-wrap items-center gap-2">
+				{{#each tags}}
+					<p data-component="tag" class="bg-green-600 text-white border w-fit px-4 border-slate-400 py-1 rounded-full text-sm font-semibold">{{this}}</p>
+				{{/each}}
+			</div>
+		</div>
+		<div class="relative">
+			<div id="todoDetails" class="h-auto overflow-hidden duration-200 ease-in-out">
+				<div class="grid grid-cols-[150px_1fr] grid-rows-[minmax(60px,1fr)] items-center gap-4 border-b-2 border-slate-300">
+					<h4 class="text-lg border-r-2 h-full border-slate-300 grid place-items-center">Description</h4>
+					<p class="todoDescription py-4">{{todoDescription}}</p>
+				</div>
+				<div class="grid grid-cols-[150px_1fr] grid-rows-[minmax(60px,1fr)] items-center gap-4 border-b-2 border-slate-300">
+					<h4 class="text-lg border-r-2 h-full border-slate-300 grid place-items-center">DueDate</h4>
+					<div class="flex items-center justify-between">
+						<span class="todoDueDate py-4">{{todoDueDate}}</span>
+						<span class="daysAgo"></span>
+					</div>
+				</div>
+				<div class="grid grid-cols-[150px_1fr] grid-rows-[minmax(60px,1fr)] items-center gap-4 border-b-2 border-slate-300">
+					<h4 class="text-lg border-r-2 h-full border-slate-300 grid place-items-center">Priority</h4>
+					<p class="py-4">{{todoPriority}}</p>
+				</div>
+				<div class="grid grid-cols-[150px_1fr] grid-rows-[minmax(60px,1fr)] items-center gap-4 border-b-2 border-slate-300">
+					<h4 class="text-lg border-r-2 h-full border-slate-300 grid place-items-center">Completed</h4>
+					<p class="py-4">{{done}}</p>
+				</div>
+			</div>
+			<button class="block absolute p-4 right-0 top-0 rounded-lg bg-white" id="detailsBtn" data-action="expand">
+				<div class="w-6 duration-300" id="expandIcon">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>arrow-expand-down</title><path
+							d="M22,4V2H2V4H11V18.17L5.5,12.67L4.08,14.08L12,22L19.92,14.08L18.5,12.67L13,18.17V4H22Z"
+						/></svg>
+				</div>
+				<div class="w-6 opacity-0 duration-300 ease-in-out absolute inset-0 m-auto top-1/2 -translate-y-1/2" id="collapseIcon">
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>arrow-collapse-up</title><path
+							d="M4.08,11.92L12,4L19.92,11.92L18.5,13.33L13,7.83V22H11V7.83L5.5,13.33L4.08,11.92M12,4H22V2H2V4H12Z"
+						/></svg>
+				</div>
+			</button>
+		</div>

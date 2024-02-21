@@ -1,0 +1,97 @@
+<h2 id="formTitle" class="text-2xl text-slate-800">Add A New Todo</h2>
+
+<div class="grid grid-cols-1 gap-2">
+	<label for="todoTitle" class="font-bold">Title</label>
+	<input type="text" placeholder="What needs to be done?" name="todoTitle" id="todoTitle" value="{{inputFields.todoTitle}}" class="border border-slate-600 rounded-sm p-2 px-4" />
+</div>
+<div class="grid grid-cols-1 gap-2">
+	<label for="todoDescription" class="font-bold">Description</label>
+	<textarea name="todoDescription" placeholder="Add details about your todo" id="todoDescription" cols="30" rows="5" class="border border-slate-600 rounded-sm p-2 px-4">{{inputFields.todoDescription}}</textarea>
+</div>
+<div class="flex items-center gap-4 [&>*]:flex-1">
+	<div class="grid grid-cols-1 gap-2">
+		<label for="todoDueDate" class="font-bold">Due Date</label>
+		<input type="date" name="todoDueDate" id="todoDueDate" value="{{inputFields.todoDueDate}}" class="border border-slate-600 rounded-sm p-2 px-4" />
+	</div>
+	<div>
+		<label for="todoPriority" class="font-bold">Priority</label>
+		<div name="todoPriority" id="todoPriority" class="mt-2">
+			<div
+				data-component="priority-option"
+				data-priority="high"
+				class="cursor-pointer flex items-center gap-2 w-full px-4 py-2 border-r-4 border-r-transparent shadow shadow-black/0 hover:shadow-black/20 hover:-translate-x-3 duration-200 ease-in-out"
+			>
+				<div id="priorityIcon" class="stroke-yellow-600 text-red-500 scale-90 duration-200 ease-in-out">
+					<svg class="" width="23" height="40" viewBox="0 0 23 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V40H2L11.5 29L21 40H23V3C23 1.34315 21.6569 0 20 0H3Z" fill="currentColor" />
+						<line x1="2.5" y1="4.5" x2="2.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+						<line x1="20.5" y1="4.5" x2="20.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+					</svg>
+				</div>
+				High
+			</div>
+			<div
+				data-component="priority-option"
+				data-priority="medium"
+				class="cursor-pointer flex items-center gap-2 w-full px-4 py-2 border-r-4 border-r-transparent shadow shadow-black/0 hover:shadow-black/20 hover:-translate-x-3 duration-200 ease-in-out"
+			>
+				<div id="priorityIcon" class="stroke-yellow-600 text-yellow-500 scale-90 duration-200 ease-in-out">
+					<svg class="" width="23" height="40" viewBox="0 0 23 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V40H2L11.5 29L21 40H23V3C23 1.34315 21.6569 0 20 0H3Z" fill="currentColor" />
+						<line x1="2.5" y1="4.5" x2="2.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+						<line x1="20.5" y1="4.5" x2="20.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+					</svg>
+				</div>
+				Medium
+			</div>
+			<div
+				data-component="priority-option"
+				data-priority="low"
+				class="cursor-pointer flex items-center gap-2 w-full px-4 py-2 border-r-4 border-r-transparent shadow shadow-black/0 hover:shadow-black/20 hover:-translate-x-3 duration-200 ease-in-out"
+			>
+				<div id="priorityIcon" class="stroke-yellow-600 text-green-600 scale-90 duration-200 ease-in-out">
+					<svg class="" width="23" height="40" viewBox="0 0 23 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M3 0C1.34315 0 0 1.34315 0 3V40H2L11.5 29L21 40H23V3C23 1.34315 21.6569 0 20 0H3Z" fill="currentColor" />
+						<line x1="2.5" y1="4.5" x2="2.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+						<line x1="20.5" y1="4.5" x2="20.5" y2="31.5" stroke-linecap="round" stroke-dasharray="2 2" />
+					</svg>
+				</div>
+				Low
+			</div>
+		</div>
+	</div>
+</div>
+<div class="flex flex-col gap-2 relative">
+	<label for="tags">Tags</label>
+	<div id="tagsContainer" class="border border-slate-600 rounded-sm pl-2 flex items-center flex-wrap">
+		<ul id="tagsList" class="flex flex-wrap items-center gap-1 w-full">
+			<li data-component="tag" class="bg-green-500 text-slate-800 py-1 px-2 rounded-full">tag1</li>
+			
+			<input type="text" name="tags" id="tags" autocomplete="off" class="py-2 px-4 flex-1 focus:outline-none" /></div>
+		</ul>
+</div>
+<div class="flex flex-col gap-2 relative" id="projectContainer">
+	<label for="projectName">Project Name</label>
+	<input
+		list=""
+		type="text"
+		name="projectName"
+		id="projectName"
+		value="{{inputFields.projectName}}"
+		autocomplete="off"
+		placeholder="Which project do you want to insert this todo into?"
+		class="border border-slate-600 rounded-sm p-2 px-4"
+	/>
+
+	<datalist
+		id="projects"
+		class="absolute top-full bg-white border-2 border-blue-500 rounded-sm w-full max-h-[200px] overflow-y-scroll [&>:not(:first-child)]:border-t [&>:not(:first-child)]:border-t-slate-300"
+	>
+	{{#each inputFields.existingProjects}}
+		<option value="{{this}}" class="py-4 px-6 cursor-pointer hover:bg-blue-500 hover:text-white">{{this}}</option>
+	{{/each}}
+	</datalist>
+</div>
+<div>
+	<button id="submitBtn" class="outline bg-blue-600 hover:bg-blue-800 text-white font-bold px-10 py-4 text-lg tracking-wider rounded-md duration-200 ease-in-out">Add</button>
+</div>
