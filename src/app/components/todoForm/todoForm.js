@@ -17,6 +17,7 @@ export default class TodoForm {
 			projectName: "",
 			existingProjects: [],
 		};
+
 		this.eventEmitter.on("projectsUpdated", this.handleProjectsUpdated.bind(this));
 		this.eventEmitter.on("openEditTodoForm", this.handleOpenEditTodoForm.bind(this));
 	}
@@ -28,10 +29,14 @@ export default class TodoForm {
 		};
 	}
 	submitData() {
+		const date = new Date(this.$todoDueDateInput.value);
+		date.setHours(new Date(Date.now()).getHours());
+		date.setMinutes(new Date(Date.now()).getMinutes());
+		date.setSeconds(new Date(Date.now()).getSeconds());
 		return {
 			todoTitle: this.$todoTitleInput.value,
 			todoDescription: this.$todoDescriptionInput.value,
-			todoDueDate: new Date(this.$todoDueDateInput.value),
+			todoDueDate: date,
 			todoPriority: this.selectedPriority,
 			tags: this.tags,
 			projectName: this.$projectName.value,
