@@ -29,9 +29,9 @@
 					</button>
 				</div>
 			</div>
-			<div class="flex items-center justify-between">
-				<h2 class="todoTitle text-5xl text-slate-800 font-bold pb-6">{{todoTitle}}</h2>
-				<div class="flex items-center gap-2">
+			<div class="flex items-center justify-between gap-4">
+				<h2 class="todoTitle text-5xl text-slate-800 font-bold pb-6 overflow-hidden overflow-ellipsis whitespace-nowrap" title="{{todoTitle}}">{{todoTitle}}</h2>
+				<div class="flex items-center gap-2 shrink-0">
 					<p>not yet</p>
 					<label for="todoDone" class="w-16 p-1 bg-slate-200 rounded-full relative">
 						<input type="checkbox" {{#if done}}checked{{/if}} name="todoDone" id="todoDone" class="appearance-none absolute inset-0 border-2 border-slate-300 shadow-md rounded-full cursor-pointer peer" />

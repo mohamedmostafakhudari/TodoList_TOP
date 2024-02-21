@@ -2,11 +2,11 @@
 
 <div class="grid grid-cols-1 gap-2">
 	<label for="todoTitle" class="font-bold">Title</label>
-	<input type="text" placeholder="What needs to be done?" name="todoTitle" id="todoTitle" value="{{inputFields.todoTitle}}" class="border border-slate-600 rounded-sm p-2 px-4" />
+	<input type="text" required maxlength="50" placeholder="What needs to be done?" name="todoTitle" id="todoTitle" value="{{inputFields.todoTitle}}" class="border border-slate-600 rounded-sm p-2 px-4" />
 </div>
 <div class="grid grid-cols-1 gap-2">
 	<label for="todoDescription" class="font-bold">Description</label>
-	<textarea name="todoDescription" placeholder="Add details about your todo" id="todoDescription" cols="30" rows="5" class="border border-slate-600 rounded-sm p-2 px-4">{{inputFields.todoDescription}}</textarea>
+	<textarea name="todoDescription" maxlength="500" placeholder="Add details about your todo" id="todoDescription" cols="30" rows="5" class="border border-slate-600 rounded-sm p-2 px-4">{{inputFields.todoDescription}}</textarea>
 </div>
 <div class="flex items-center gap-4 [&>*]:flex-1">
 	<div class="grid grid-cols-1 gap-2">
@@ -74,6 +74,8 @@
 	<label for="projectName">Project Name</label>
 	<input
 		list=""
+		required
+		maxlength="100"
 		type="text"
 		name="projectName"
 		id="projectName"
