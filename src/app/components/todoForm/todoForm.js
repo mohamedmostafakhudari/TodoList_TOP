@@ -11,7 +11,7 @@ export default class TodoForm {
 		this.initialInputFields = {
 			todoTitle: "",
 			todoDescription: "",
-			todoDueDate: "",
+			todoDueDate: new Date(Date.now()).toISOString().split("T")[0],
 			todoPriority: "low",
 			tags: [],
 			projectName: "",
@@ -64,11 +64,12 @@ export default class TodoForm {
 	clear() {
 		this.mode = "add";
 		this.$todoFormDialog.dataset.todoId = "";
+		this.tags = [];
 		this.initialInputFields = {
 			...this.initialInputFields,
 			todoTitle: "",
 			todoDescription: "",
-			todoDueDate: "",
+			todoDueDate: new Date(Date.now()).toISOString().split("T")[0],
 			todoPriority: "low",
 			tags: [],
 		};
