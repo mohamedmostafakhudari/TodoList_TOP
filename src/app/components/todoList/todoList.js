@@ -29,7 +29,10 @@ export default class TodoList {
 	}
 	handleTodoListUpdated({ projectName, list }) {
 		this.renderTodoList({ projectName, list });
-		this.handlePageChange(this.currentPage - 1);
+		const currentPage = this.currentPage;
+		this.handlePageChange(0);
+		this.handlePageChange(currentPage - 1);
+		this.renderPageNumbering();
 	}
 	updatePageNumber(change) {
 		this.currentPage += change;
@@ -227,7 +230,6 @@ export default class TodoList {
 		}
 	}
 	handlePageChange(pageNumber) {
-		console.log(pageNumber);
 		if (pageNumber + 1 === this.currentPage) return;
 		if (pageNumber + 1 > this.currentPage) {
 			this.scrollRight(800 * Math.abs(pageNumber + 1 - this.currentPage));
