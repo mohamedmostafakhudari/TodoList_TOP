@@ -11,7 +11,6 @@ export default class Projects {
 		this.eventEmitter.on("deleteTodo", this.handleDeleteTodo.bind(this));
 		this.eventEmitter.on("doneChecked", this.handleDoneChecked.bind(this));
 		this.filters = [];
-		// this.filteredList = [];
 		this.initialProjects = [
 			{
 				id: "1",
@@ -394,15 +393,13 @@ export default class Projects {
 		}
 	}
 	handleProjectSelected(projectId) {
-		// const project = this.getProjectById(projectId);
 		this.selectedProjectId = projectId;
 		this.clearFilters();
 		this.updateFiltersUI();
 		this.setFilterValue(this.defaultFilterValue);
 		this.setSortValue(this.defaultSortValue);
 		this.renderProjectsList(this.projects, projectId);
-		// this.eventEmitter.emit("projectsUpdated", { selectedProject: project, projectsNames: this.projects.map((project) => project.name) });
-		// this.eventEmitter.emit("todoListUpdated", { projectName: project.name, list: project.list });
+		this.eventEmitter.emit("projectSelected");
 	}
 	handleDeleteTodo(todoId) {
 		this.removeTodoFromProject(this.selectedProjectId, todoId);
@@ -435,8 +432,6 @@ export default class Projects {
 			return project;
 		});
 		this.projects = newProjects;
-		// const selectedProject = this.getProjectById(this.selectedProjectId);
-		// this.eventEmitter.emit("todoListUpdated", { projectName: selectedProject.name, list: selectedProject.list });
 		localStorage.setItem("projects", JSON.stringify(this.projects));
 	}
 	cacheDOM() {

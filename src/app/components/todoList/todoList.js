@@ -25,12 +25,16 @@ export default class TodoList {
 		this.throttledHandlePrevBtnClick = throttle(this.handlePrevBtnClick.bind(this), 500);
 		this.throttledHandleNextBtnClick = throttle(this.handleNextBtnClick.bind(this), 500);
 		this.eventEmitter.on("todoListUpdated", this.handleTodoListUpdated.bind(this));
+		this.eventEmitter.on("projectSelected", this.handleProjectSelected.bind(this));
 	}
 	handleTodoListUpdated({ projectName, list }) {
 		this.renderTodoList({ projectName, list });
 	}
 	updatePageNumber(change) {
 		this.currentPage += change;
+	}
+	resetPageNumbering() {
+		this.handlePageChange(0);
 	}
 	createTodoItem({ todo: todoItem, projectName }) {
 		const $todoItem = document.createElement("li");
@@ -98,7 +102,7 @@ export default class TodoList {
 		$pageButton.addEventListener("click", (e) => {
 			e.preventDefault();
 			this.collapseAllTodoItems();
-			delay(300).then(() => this.handlePageChange(pageNumber).bind(this));
+			delay(300).then(() => this.handlePageChange(pageNumber));
 		});
 		return $pageButton;
 	}
@@ -116,6 +120,9 @@ export default class TodoList {
 		this.bindEvents();
 	}
 	renderPageNumbering() {
+		if (this.$pagesNumbering) {
+			this.$pagesNumbering.remove();
+		}
 		const $todoListContainer = document.querySelector("#todoListContainer");
 		const $pagesNumbering = this.createPagesNumbering();
 		$todoListContainer.appendChild($pagesNumbering);
@@ -198,6 +205,10 @@ export default class TodoList {
 			});
 		});
 	}
+	handleProjectSelected() {
+		this.resetPageNumbering();
+		this.renderPageNumbering();
+	}
 	handlePrevBtnClick() {
 		if (this.$todoList.scrollLeft <= 0) return;
 		this.scrollLeft();
@@ -258,6 +269,7 @@ export default class TodoList {
 		this.$todoList = document.querySelector("#todoList");
 		this.$prevBtn = document.querySelector("#prevBtn");
 		this.$nextBtn = document.querySelector("#nextBtn");
+		this.$pagesNumbering = document.querySelector("#pagesNumbering");
 		this.$todoItems = document.querySelectorAll("[data-component=todo-item]");
 	}
 }
